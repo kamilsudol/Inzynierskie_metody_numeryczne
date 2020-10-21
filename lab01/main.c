@@ -16,6 +16,10 @@ double k_function(double lambda, double dt, double y, double k){
     return lambda*(y + dt*k);
 }
 
+double potential(double omega, double dt){
+    return 10*sin(omega*dt);
+}
+
 void podpunkt1(double dt, const char * plik1, const char * plik2, const char * plik3){
     FILE *file_ptr1 = fopen(plik1, "w"), *file_ptr2 = fopen(plik2, "w"), *file_ptr3 = fopen(plik3, "w");
 
@@ -84,8 +88,40 @@ void podpunkt3(double dt, const char * plik1, const char * plik2, const char * p
     fclose(file_ptr3);
 }
 
-void podpunkt4(){
-    
+void podpunkt4(double omega, const char * plik1, const char * plik2){
+    FILE *file_ptr1 = fopen(plik1, "w"), *file_ptr2 = fopen(plik2, "w");
+
+    double kq1, kq2, kq3, kq4, ki1, ki2, ki3, ki4;
+
+    double R = 100, L = 0.1, C = 0.001, dt = 0.0004;
+    double w0 = 1/sqrt(L*C), T0 = (2*M_PI)/w0, t = 0;
+    double Q0 = 0, Qn, I0 = 0, In;
+    int i = 0;
+
+    while(t <= 4*T0){
+        kq1 = I0;
+        ki1 = potential(omega*w0, t)/L -Q0/(L*C) - (R*I0)/L;
+        kq2 = k_function(1, dt/2.0, I0, ki1);
+        ki2 = potential(omega*w0, t + dt/2.0)/L - k_function(1/(L*C), dt/2.0, Q0, kq1)-k_function(R/L, dt/2.0, I0, ki1);
+        kq3 = k_function(1, dt/2.0, I0, ki2);
+        ki3 = potential(omega*w0, t + dt/2.0)/L - k_function(1/(L*C), dt/2.0, Q0, kq2)-k_function(R/L, dt/2.0, I0, ki2);
+        kq4 = k_function(1, dt, I0, ki3);
+        ki4 = potential(omega*w0, t + dt)/L - k_function(1/(L*C), dt, Q0, kq3)-k_function(R/L, dt, I0, ki3);
+
+        Qn = Q0 + (dt/6.0)*(kq1+2*kq2+2*kq3+kq4);
+        In = I0 + (dt/6.0)*(ki1+2*ki2+2*ki3+ki4);
+
+        fprintf(file_ptr1, "%d %f\n", i, Q0);
+        fprintf(file_ptr2, "%d %f\n", i, I0);
+
+        i++;
+        Q0 = Qn;
+        I0 = In;
+        t += dt;
+    }
+
+    fclose(file_ptr1);
+    fclose(file_ptr2);
 }
 
 int main(){
@@ -101,6 +137,11 @@ int main(){
     podpunkt3(0.01, "RK41.txt", "RK4a1.txt", "RK4b1.txt");
     podpunkt3(0.1, "RK42.txt", "RK4a2.txt", "RK4b2.txt");
     podpunkt3(1.0, "RK43.txt", "RK4a3.txt", "RK4b3.txt");
+
+    podpunkt4(0.5, "Q1.txt", "I1.txt");
+    podpunkt4(0.8, "Q2.txt", "I2.txt");
+    podpunkt4(1.0, "Q3.txt", "I3.txt");
+    podpunkt4(1.2, "Q4.txt", "I4.txt");
     
     return 0;
 }

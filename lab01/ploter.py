@@ -147,3 +147,51 @@ plt.legend(loc = 'lower right')
 
 plt.savefig("RK4_blad.png")
 plt.clf()
+
+###################################################################
+
+for i in range(1,5):
+    multiplier = 0
+    if( i == 1):
+        lab = "0.5 w0"
+    elif i == 2:
+        lab = "0.8 w0"
+    elif i == 3:
+        lab = "1.0 w0"
+    elif i == 4:
+        lab = "1.2 w0"
+    file = "Q" + str(i) + ".txt"
+    data = np.loadtxt(file)
+
+    x = data[:, 0]
+    y = data[:, 1]
+
+    plt.plot(x, y, '-', label = lab)
+
+plt.legend(loc = 'upper right')
+
+plt.savefig("Q.png")
+plt.clf()
+
+for i in range(1,5):
+    multiplier = 0
+    if( i == 1):
+        lab = "0.5 w0"
+    elif i == 2:
+        lab = "0.8 w0"
+    elif i == 3:
+        lab = "1.0 w0"
+    elif i == 4:
+        lab = "1.2 w0"
+    file = "I" + str(i) + ".txt"
+    data = np.loadtxt(file)
+
+    x = data[:, 0]
+    y = data[:, 1]
+
+    plt.plot(x, y, '-', label = lab)
+
+plt.legend(loc = 'upper right')
+
+plt.savefig("I.png")
+plt.clf()
