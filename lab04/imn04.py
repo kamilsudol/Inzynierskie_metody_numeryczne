@@ -1,16 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 """
     IMN LAB04 KAMIL SUDOL
 """
-
-
-def file_maker(L,a, filename):
-    f=open(filename,a)
-    f.write(str(L) + '\n')
-    f.close()
 
 
 def ro1(x, y, xmax, ymax, gammax, gammay):
@@ -75,7 +68,7 @@ def glob(omega):
             Ro[i][j] = ro(i * delta, j * delta, xmax, ymax, gammax, gammay)
 
     while True:
-        Suma.append(Sit)
+
         for i in range(1, nx):
             for j in range(1, ny):
                 Vnowe[i][j] = Gvij(Vstare[i + 1][j], Vstare[i - 1][j], Vstare[i][j + 1], Vstare[i][j - 1], delta, epsilon, Ro[i][j])
@@ -90,6 +83,7 @@ def glob(omega):
 
         Sit_1 = Sit
         Sit = stop(Vnowe, Ro, delta, nx, ny)
+        Suma.append(Sit)
 
         if abs((Sit - Sit_1)/Sit_1) < TOL:
             break
@@ -97,9 +91,9 @@ def glob(omega):
     for i in range(1, nx):
         for j in range(1, ny):
             Sigma[i][j]=sigma(Vnowe[i+1][j],Vnowe[i][j],Vnowe[i-1][j],Vnowe[i][j+1],Vnowe[i][j-1],delta, Ro[i][j], epsilon)
-            file_maker(str(i*delta)+" "+str(j*delta)+" "+str(Sigma[i][j]),'a', "sigma_"+str(omega)+".txt")
-            file_maker(str(i*delta)+" "+str(j*delta)+" "+str(Vnowe[i][j]),'a', "V_"+str(omega)+".txt")
 
+    ploter(Vnowe, "Wykres relaksacji (w="+str(omega)+")", "relaksacja_"+str(omega))
+    ploter(Sigma, "Wykres relaksacji (w="+str(omega)+") - blad", "sigma_"+str(omega))
     return Suma
 
 
@@ -131,7 +125,7 @@ def lokal(omega):
             Ro[i][j] = ro(i * delta, j * delta, xmax, ymax, gammax, gammay)
 
     while True:
-        Suma.append(Sit)
+
         for i in range(1, nx):
             for j in range(1, ny):
                 V[i][j] = Lvij(omega, V[i][j], V[i + 1][j], V[i - 1][j], V[i][j + 1], V[i][j - 1], delta, epsilon, Ro[i][j])
@@ -142,7 +136,7 @@ def lokal(omega):
 
         Sit_1 = Sit
         Sit = stop(V, Ro, delta, nx, ny)
-
+        Suma.append(Sit)
         if abs((Sit - Sit_1)/Sit_1) < TOL:
             break
 
@@ -159,6 +153,16 @@ def podpunkt2():
     title = "Relaksacja lokalna"
     wynik = [lokal(1.0), lokal(1.4), lokal(1.8), lokal(1.9)]
     ploter2(wynik[0], wynik[1], wynik[2], wynik[3], 1.0, 1.4, 1.8, 1.9, title)
+
+
+def ploter(t,title, file):
+    plt.imshow(t, cmap='jet')
+    plt.title(title)
+    plt.colorbar(orientation='vertical')
+    plt.ylabel("x")
+    plt.xlabel("y")
+    plt.savefig(file+".png")
+    plt.show()
 
 
 def ploter1(s1, s2, o1, o2, title):
@@ -191,7 +195,6 @@ def ploter2(s1, s2, s3, s4, o1, o2, o3, o4, title):
 
 def main(args):
     podpunkt1()
-    podpunkt2()
 
 
 if __name__ == '__main__':

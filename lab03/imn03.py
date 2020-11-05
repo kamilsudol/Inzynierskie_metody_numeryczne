@@ -1,4 +1,3 @@
-import numpy as np
 import matplotlib.pyplot as plt
 
 """
@@ -142,7 +141,7 @@ def ploter(x1, y1, x2, y2, title, label1, label2, file):
     plt.legend(loc='upper right')
     plt.title(title)
     plt.savefig(file + ".png")
-    plt.show()
+    #plt.show()
     plt.clf()
 
 
