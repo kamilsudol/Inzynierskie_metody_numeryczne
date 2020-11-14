@@ -2,6 +2,12 @@ import matplotlib.pyplot as plt
 
 """
     IMN LAB03 KAMIL SUDOL
+
+    Drobna uwaga:
+        Wykresy przy TOL = 10**(-2) oraz TOL = 10**(-5) nie za bardzo oddaja wyglad przykladowych wynikow, jednak zauwazylem, ze ten stan poprawia sie przy 
+        odpowiednio TOL = 10**(-3) oraz TOL = 10**(-6). Nie za bardzo mam pojecie, dlaczego tak sie dzieje, ale podejrzewam, ze jest to spowodowane
+        inna reprezentacja liczb zmiennioprzecinkowych w pythonie (w szczegolnosci jezeli chodzi o wykresy dt(t), a mimo to ksztalty pozostalych wykresow sa 'poprawne').
+ 
 """
 
 

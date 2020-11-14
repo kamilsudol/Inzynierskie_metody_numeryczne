@@ -682,7 +682,7 @@ void ilu_cr ( int n, int nz_num, int ia[], int ja[], double a[], int ua[],
         {
             fprintf ( stderr, "\n" );
             fprintf ( stderr, "ILU_CR - Fatal error!\n" );
-            fprintf ( stderr, "  Zero pivot on step I = \n", i );
+            fprintf ( stderr, "  Zero pivot on step I = %d\n", i );
             fprintf ( stderr, "  L[%d] = 0.0\n", j );
             exit ( 1 );
         }
