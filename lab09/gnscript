@@ -1,0 +1,32 @@
+set term png
+set out "temperatura1.png"
+plot "temperatura1.out" u 1:2:3 w p pt 7 palette
+
+set out "temperatura2.png"
+plot "temperatura2.out" u 1:2:3 w p pt 7 palette
+
+set out "temperatura3.png"
+plot "temperatura3.out" u 1:2:3 w p pt 7 palette
+
+set out "temperatura4.png"
+plot "temperatura4.out" u 1:2:3 w p pt 7 palette
+
+set out "temperatura5.png"
+plot "temperatura5.out" u 1:2:3 w p pt 7 palette
+
+
+
+set out "laplasjan1.png"
+plot "laplasjan1.out" u 1:2:3 w p pt 7 palette
+
+set out "laplasjan2.png"
+plot "laplasjan2.out" u 1:2:3 w p pt 7 palette
+
+set out "laplasjan3.png"
+plot "laplasjan3.out" u 1:2:3 w p pt 7 palette
+
+set out "laplasjan4.png"
+plot "laplasjan4.out" u 1:2:3 w p pt 7 palette
+
+set out "laplasjan5.png"
+plot "laplasjan5.out" u 1:2:3 w p pt 7 palette
