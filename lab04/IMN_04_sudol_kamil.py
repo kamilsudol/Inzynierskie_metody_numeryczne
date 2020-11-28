@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 
 """
     IMN LAB04 KAMIL SUDOL
+
+    Drobne uwagi:
+        Bardzo bym prosił o cierpliwość, bo jednak program wykonuje się tę parę minut :)
 """
 
 
@@ -65,7 +68,7 @@ def glob(omega):
 
     for i in range(1, nx):
         for j in range(1, ny):
-            Ro[i][j] = ro(i * delta, j * delta, xmax, ymax, gammax, gammay)
+            Ro[i][j] = ro(i * delta, j * delta, xmax, ymax, gammax, gammay) #zapisanie gestosci do macierzy w celu przyspieszenia programu
 
     while True:
 
@@ -122,7 +125,7 @@ def lokal(omega):
 
     for i in range(1, nx):
         for j in range(1, ny):
-            Ro[i][j] = ro(i * delta, j * delta, xmax, ymax, gammax, gammay)
+            Ro[i][j] = ro(i * delta, j * delta, xmax, ymax, gammax, gammay) #zapisanie gestosci do macierzy w celu przyspieszenia programu
 
     while True:
 
@@ -158,11 +161,12 @@ def podpunkt2():
 def ploter(t,title, file):
     plt.imshow(t, cmap='jet')
     plt.title(title)
-    plt.colorbar(orientation='vertical')
+    #plt.colorbar(orientation='vertical')
     plt.ylabel("x")
     plt.xlabel("y")
     plt.savefig(file+".png")
-    plt.show()
+    plt.clf()
+    #plt.show()
 
 
 def ploter1(s1, s2, o1, o2, title):
@@ -174,7 +178,7 @@ def ploter1(s1, s2, o1, o2, title):
     plt.ylabel("S")
     plt.xlabel("Iteracja")
     plt.savefig("s(it)_glob.png")
-    plt.show()
+    #plt.show()
     plt.clf()
 
 
@@ -189,12 +193,13 @@ def ploter2(s1, s2, s3, s4, o1, o2, o3, o4, title):
     plt.ylabel("S")
     plt.xlabel("Iteracja")
     plt.savefig("s(it)_lok.png")
-    plt.show()
+    #plt.show()
     plt.clf()
 
 
 def main(args):
     podpunkt1()
+    podpunkt2()
 
 
 if __name__ == '__main__':

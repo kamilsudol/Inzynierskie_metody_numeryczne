@@ -6,6 +6,12 @@
 
 /*
     IMN LAB06 KAMIL SUDOL
+    Drobne uwagi:
+        Na wykresach "mapa6" oraz "mapa7" wartosci sie zgadzaja, jednak skala wartosci nie jest odpowiednio ustawiona,
+        przez co same wykresy nie wygladaja za ciekawie.
+
+        Do wyrysowania wykresow wystarczy napisac w konsoli:
+        gnuplot gnplt
 */
 
 double ro1(double x, double y, double sigma, double xmax, double ymax){

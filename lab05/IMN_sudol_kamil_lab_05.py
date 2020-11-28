@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 
 """
     IMN LAB05 KAMIL SUDOL
+    Drobne uwagi:
+        Jako, że na wykonanie programu trzeba poczekać te 15 minut, to w ramach oszczedności czasu
+        załączyłem Panu od razu wyniki.
+        Pozdrawiam cieplutko :)
 """
 
 
@@ -46,7 +50,6 @@ def siatka(k):
 
     Sit = 1.0
     Suma = []
-    #iter = 0
 
     while True:
         for i in range(k, nx-k+1, k):
@@ -88,7 +91,8 @@ def ploter1(t,title, file):
     plt.ylabel("x")
     plt.xlabel("y")
     plt.savefig(file)
-    plt.show()
+    #plt.show()
+    plt.clf()
 
 
 def ploter2(s1, s2, s3, s4, s5, k1, k2, k3, k4, k5, title):
@@ -102,7 +106,7 @@ def ploter2(s1, s2, s3, s4, s5, k1, k2, k3, k4, k5, title):
     plt.ylabel("S")
     plt.xlabel("Iteracja")
     plt.savefig("s(it).png")
-    plt.show()
+    #plt.show()
     plt.clf()
 
 

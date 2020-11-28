@@ -6,6 +6,10 @@
 #include <gsl/gsl_linalg.h>
 #include <gsl/gsl_blas.h>
 
+/*
+    IMN KAMIL SUDOL LAB09
+*/
+
 int l_function(int i, int j, int nx){
     return i+j*(nx+1);
 }
