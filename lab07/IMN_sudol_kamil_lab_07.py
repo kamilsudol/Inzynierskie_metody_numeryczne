@@ -22,6 +22,9 @@ import multiprocessing
         Domyślnie ustawiona jest wersja pierwsza, jednakże jeżeli miałby Pan czas oraz chęci, to w mainie na dole 
         może Pan odkomentować interesująca Pana wersję do wykonania.
         
+        W przypadku uruchamiania programu na taurusie prosze o usunięcie całej sekcji tego komentarza, ponieważ pojawia
+        się błąd spowodowany polskimi znakami.
+        
         Pozdrawiam cieplutko :)
 """
 
@@ -185,7 +188,7 @@ def ploter1(t,title, file):
     plt.ylabel("y")
     plt.xlabel("x")
     plt.savefig(file+".png")
-    plt.show()
+    # plt.show()
     plt.clf()
 
 
@@ -196,7 +199,7 @@ def ploter2(t,title, file):
     plt.ylabel("x")
     plt.xlabel("y")
     plt.savefig(file+".png")
-    plt.show()
+    # plt.show()
     plt.clf()
 
 
@@ -214,9 +217,9 @@ def main(args):
              multiprocessing.Process(None, stokes, args=(0.01, 1, 1, 200, 90, 50, 55, 25000, -4000, q, 3)),
              multiprocessing.Process(None, stokes, args=(0.01, 1, 1, 200, 90, 50, 55, 25000, 4000, q, 3))]
 
-    # podpunkt1(list1, q)
+    podpunkt1(list1, q)
     # podpunkt1(list2, q)
-    podpunkt1(list3, q)
+    # podpunkt1(list3, q)
 
 
 
