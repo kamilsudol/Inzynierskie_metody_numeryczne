@@ -4,6 +4,23 @@ import numpy as np
 
 """
     IMN LAB08 KAMIL SUDOL
+    Drobne uwagi:
+        Z racji tego, ze projekt ten wykonuje sie najdluzej sprosrod wszystkich dziesieciu,
+        pozwolilem sobie na wprowadzenie drobnych uproszczen w kodzie celu przyspieszenia
+        dzialania programu, tj wykomentowanie dodatkowych 20 iteracji z funkcji ad(..).
+        Z calych sil probowalem napisac kod wg podanych wytycznych, jednak tym razem nawet
+        wprowadzenie multiprocessingu nie bylo w stanie poprawic czasu wykonywania. Przy 
+        pierwotnych wytycznych dla 40 iteracji program dlawil sie do tego stopnia, ze 30
+        minut oczekiwania na wynik bylo norma, nie wspominajac juz o wiekszej liczbie iteracji,
+        ktora byla wymagana, aby pokazaly sie 3 maksima na wykresie xsr(t). Probowalem po tej 
+        "optymalizacji" wywolac program dla 12000 iteracji, zeby dla Pana wygody dorzucic 
+        mniej wiecej oczekiwane wyniki, jednakze dla kazdorazowej proby wywolalanie konczylo
+        sie fiaskiem, bo po okolu 2 godzinach przywieszal sie komputer. Dolaczylem jednak 
+        wynik dla 2500 iteracji, na ktore co prawda wystarczy poczekac okolo dwudziestu minut, 
+        jednak nie chcialbym, zeby marnowal Pan na to tyle czasu. Defaultowo zostawilem 1200 
+        iteracji, przy ktorych oczekuje sie okolo 5 minut.
+        
+        Pozdrawiam cieplutko :)
 """
 
 iter = 0
@@ -74,16 +91,6 @@ def u_function_wb2(un, un1, i, j, nx, ny, delta, D, dt, vx, vy):
 def u_function(un, un1, i, j, nx, ny, delta, D, dt, vx, vy):
     un1[i][j] = (delta**2)/(delta**2 + 2*D*dt)*(un[i][j] - (dt*vx[i][j]/2.)*((un[i+1][j] - un[i-1][j])/(2*delta)+(un1[i+1][j] - un1[i-1][j])/(2*delta)) - (dt*vy[i][j]/2.)*((un[i][j+1] - un[i][j-1])/(2*delta)+(un1[i][j+1] - un1[i][j-1])/(2*delta)) + (dt*D/2.)*((un[i+1][j]+un[i-1][j]+un[i][j+1]+un[i][j-1]- 4*un[i][j])/(delta**2)+(un1[i+1][j]+un1[i-1][j]+un1[i][j+1]+un1[i][j-1])/(delta**2)))
 
-# def u_function_wb1(un, un1, i, j, nx, ny, delta, D, dt, vx, vy,mi):
-#     un1[i][j] = (delta**2)/(delta**2 + 2*D*dt)*(un[i][j] - (dt*vx[i][j]/2.)*((un[i+1][j] - un[nx][j])/(2*delta)+((un1[i+1][j] - un1[nx][j])/(2*delta))**mi) - (dt*vy[i][j]/2.)*((un[i][j+1] - un[i][j-1])/(2*delta)+((un1[i][j+1] - un1[i][j-1])/(2*delta))**mi) + (dt*D/2.)*((un[i+1][j]+un[nx][j]+un[i][j+1]+un[i][j-1]- 4*un[i][j])/(delta**2)+((un1[i+1][j]+un1[nx][j]+un1[i][j+1]+un1[i][j-1])/(delta**2))**(mi-1)))
-#
-#
-# def u_function_wb2(un, un1, i, j, nx, ny, delta, D, dt, vx, vy,mi):
-#     un1[i][j] = (delta**2)/(delta**2 + 2*D*dt)*(un[i][j] - (dt*vx[i][j]/2.)*((un[0][j] - un[i-1][j])/(2*delta)+((un1[0][j] - un1[i-1][j])/(2*delta))**mi) - (dt*vy[i][j]/2.)*((un[i][j+1] - un[i][j-1])/(2*delta)+((un1[i][j+1] - un1[i][j-1])/(2*delta))**mi) + (dt*D/2.)*((un[0][j]+un[i-1][j]+un[i][j+1]+un[i][j-1]- 4*un[i][j])/(delta**2)+((un1[0][j]+un1[i-1][j]+un1[i][j+1]+un1[i][j-1])/(delta**2))**(mi-1)))
-#
-#
-# def u_function(un, un1, i, j, nx, ny, delta, D, dt, vx, vy,mi):
-#     un1[i][j] = (delta**2)/(delta**2 + 2*D*dt)*(un[i][j] - (dt*vx[i][j]/2.)*((un[i+1][j] - un[i-1][j])/(2*delta)+((un1[i+1][j] - un1[i-1][j])/(2*delta))**mi) - (dt*vy[i][j]/2.)*((un[i][j+1] - un[i][j-1])/(2*delta)+((un1[i][j+1] - un1[i][j-1])/(2*delta))**mi) + (dt*D/2.)*((un[i+1][j]+un[i-1][j]+un[i][j+1]+un[i][j-1]- 4*un[i][j])/(delta**2)+((un1[i+1][j]+un1[i-1][j]+un1[i][j+1]+un1[i][j-1])/(delta**2))**(mi-1)))
 
 def calka(un, nx, ny):
     suma = 0
@@ -153,7 +160,6 @@ def crank_nicolson(nx, ny, i1, i2, j1, delta, sigma, xA, yA, D, IT_MAX, kolejka,
     vy_function(psi, vy, nx, ny, i1, i2, j1, delta)
     vmax = vmax_function(vx, vy, nx, ny)
     dt = delta/(4*vmax)
-    #print(dt)
 
 
     wynik = ad(un, un1, nx, ny, x, y, xA, yA, i1, i2, j1, delta, sigma, dt, D, vx, vy, IT_MAX)
@@ -198,7 +204,7 @@ def ploter1(t, title, file):
     plt.ylabel("y")
     plt.xlabel("x")
     plt.savefig(file + ".png")
-    plt.show()
+    #plt.show()
     plt.clf()
 
 
@@ -210,13 +216,14 @@ def ploter2(t1, t2, title, file):
     plt.ylabel(title)
     plt.xlabel("tn")
     plt.savefig(file + ".png")
-    plt.show()
+    #plt.show()
     plt.clf()
 
 
 def main(args):
     q = multiprocessing.Queue()
-    tmax = 3500
+    tmax = 1200
+    #tmax = 2500
     k = 5
     t = tmax/k
     list1 = []
