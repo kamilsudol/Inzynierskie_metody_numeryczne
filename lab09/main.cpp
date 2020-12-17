@@ -8,6 +8,11 @@
 
 /*
     IMN KAMIL SUDOL LAB09
+    Drobne uwagi:
+        Program nie zwraca poprawnych wynikow. Aby skompilowac program, wystarczy wywolac procedure make,
+        a do wyswietlenia wykresow wywolac gnuplot gnscript.
+
+        Pozdrawiam cieplutko :)
 */
 
 int l_function(int i, int j, int nx){
