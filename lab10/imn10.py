@@ -96,7 +96,7 @@ def ploter1(t, title, file):
     plt.ylabel("t")
     plt.xlabel("x")
     plt.savefig(file + ".png")
-    plt.show()
+    # plt.show()
     plt.clf()
 
 
@@ -109,7 +109,7 @@ def ploter2(t1, t2, t3, title, file):
     plt.ylabel("x")
     plt.xlabel("t")
     plt.savefig(file + ".png")
-    plt.show()
+    # plt.show()
     plt.clf()
 
 def ploter3(t1, title, file):
@@ -119,7 +119,7 @@ def ploter3(t1, title, file):
     plt.ylabel("x")
     plt.xlabel("t")
     plt.savefig(file + ".png")
-    plt.show()
+    # plt.show()
     plt.clf()
 
 
